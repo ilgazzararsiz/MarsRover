@@ -2,8 +2,8 @@
 {
     public enum DirectionCommand
     {
-        Left,
-        Right,
-        Move
+        Left = 'L',
+        Right = 'R',
+        Move = 'M'
     }
 }

@@ -5,12 +5,12 @@ namespace MarsRover.Models
     public class Position
     {
         public Coordinates Coordinates { get; set; }
-        public RoverDirection RoverDirection { get; set; }
+        public Direction Direction { get; set; }
 
-        public Position(Coordinates Coordinates, RoverDirection RoverDirection)
+        public Position(Coordinates Coordinates, Direction Direction)
         {
             this.Coordinates = Coordinates;
-            this.RoverDirection = RoverDirection;
+            this.Direction = Direction;
         }
     }
 }
