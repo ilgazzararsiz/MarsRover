@@ -28,25 +28,27 @@ namespace MarsRover.Models
             }
         }
 
-        private bool CanMoveRover(Rover rover)
+        public bool CanMoveRover(Rover rover)
         {
             if (IsRoverInPlateauBoundaries(rover))
                 throw new RoverOutOfBoundariesException();
-            else if (DidRoversCrashed(rover))
+            else if (DidRoversCrash(rover))
                 throw new RoversCrashedException();
             return true;
         }
 
-        private bool IsRoverInPlateauBoundaries(Rover rover)
+        public bool IsRoverInPlateauBoundaries(Rover rover)
         {
-            return BoundaryCoordinates.X < Math.Abs(rover.Position.Coordinates.X) || BoundaryCoordinates.Y < Math.Abs(rover.Position.Coordinates.Y);
+            return BoundaryCoordinates.X < Math.Abs(rover.Position.Coordinates.X) 
+                || BoundaryCoordinates.Y < Math.Abs(rover.Position.Coordinates.Y);
         }
 
-        private bool DidRoversCrashed(Rover rover)
+        public bool DidRoversCrash(Rover rover)
         {
             foreach (Rover r in Rovers)
             {
-                if (r.Position == rover.Position)
+                if (r.Position.Coordinates.X == rover.Position.Coordinates.X 
+                    && r.Position.Coordinates.Y == rover.Position.Coordinates.Y)
                     return true;
             }
             return false;

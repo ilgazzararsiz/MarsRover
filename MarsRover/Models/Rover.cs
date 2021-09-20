@@ -26,7 +26,7 @@ namespace MarsRover.Models
             }
         }
 
-        public Position Move()
+        private Position Move()
         {
             var newPosition = new Position(Position.Coordinates, Position.Direction);
 
@@ -51,7 +51,7 @@ namespace MarsRover.Models
             return newPosition;
         }
 
-        public Direction TurnRight()
+        private Direction TurnRight()
         {
             switch (Position.Direction)
             {
@@ -68,7 +68,7 @@ namespace MarsRover.Models
             }
         }
 
-        public Direction TurnLeft()
+        private Direction TurnLeft()
         {
             switch (Position.Direction)
             {

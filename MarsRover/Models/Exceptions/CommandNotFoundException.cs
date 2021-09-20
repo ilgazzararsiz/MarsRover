@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace MarsRover.Models
 {
     [Serializable]
-    internal class CommandNotFoundException : Exception
+    public class CommandNotFoundException : Exception
     {
         public CommandNotFoundException()
         {

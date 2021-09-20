@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace MarsRover.Models
 {
     [Serializable]
-    internal class RoversCrashedException : Exception
+    public class RoversCrashedException : Exception
     {
         public RoversCrashedException()
         {

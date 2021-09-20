@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace MarsRover.Models
 {
     [Serializable]
-    internal class DirectionNotFoundException : Exception
+    public class DirectionNotFoundException : Exception
     {
         public DirectionNotFoundException()
         {

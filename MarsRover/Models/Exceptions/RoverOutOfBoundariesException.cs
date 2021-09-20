@@ -3,7 +3,7 @@
 namespace MarsRover.Models
 {
     [Serializable]
-    internal class RoverOutOfBoundariesException : Exception
+    public class RoverOutOfBoundariesException : Exception
     {
         public RoverOutOfBoundariesException()
         {
