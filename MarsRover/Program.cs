@@ -9,25 +9,61 @@ namespace MarsRover
     {
         public static void Main(string[] args)
         {
-            Plateau plateau = new Plateau(new Coordinates(5, 5));
-            Rover rover = new Rover(new Position(new Coordinates(1, 2), Direction.North));
+            var input = "5 5\n" +
+                "1 2 N\n" +
+                "LMLMLMLMM\n" +
+                "3 3 E\n" +
+                "MMRMMRMRRM";
 
+            var inputArray = input.Split("\n");
+            var plateauCoordinates = inputArray[0].Split(" ");
+            Plateau plateau = new Plateau(new Coordinates(int.Parse(plateauCoordinates[0]), int.Parse(plateauCoordinates[1])));
             List<Rover> rovers = new List<Rover>();
 
-            rovers.Add(rover);
+            for (int i = 1; i < inputArray.Length; i++)
+            {
+                if (i % 2 != 0)
+                {
+                    var currentRover = inputArray[i].Split(" ");
+                    Rover rover = new Rover(
+                                    new Position(
+                                        new Coordinates(int.Parse(currentRover[0]), int.Parse(currentRover[1])), (Direction)currentRover[2].ToCharArray()[0])
+                            );
+                    rovers.Add(rover);
+                }
+            }
+
             plateau.Rovers = rovers;
 
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Left);
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Move);
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Left);
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Move);
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Left);
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Move);
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Left);
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Move);
-            plateau.Rovers[0].ChangePosition(DirectionCommand.Move);
+            List<List<DirectionCommand>> directionCommands = new List<List<DirectionCommand>>();
 
-            Console.WriteLine(plateau.Rovers[0].ShowCurrentPosition());
+
+            for(int i = 2; i < inputArray.Length; i++)
+            {
+                if(i % 2 == 0)
+                {
+                    List<DirectionCommand> commands = new List<DirectionCommand>();
+
+                    foreach(char c in inputArray[i].ToCharArray())
+                    {
+                        commands.Add((DirectionCommand)c);
+                    }
+
+                    directionCommands.Add(commands);
+                }
+            }
+
+            for(int i = 0; i < plateau.Rovers.Count; i++)
+            {
+                foreach (DirectionCommand directionCommand in directionCommands[i])
+                {
+                    plateau.Rovers[i].ChangePosition(directionCommand);
+                }
+            }
+            foreach(Rover rover in plateau.Rovers)
+            {
+                Console.WriteLine(rover.ShowCurrentPosition());
+            }
         }
     }
 }

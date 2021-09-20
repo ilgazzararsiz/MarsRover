@@ -1,5 +1,4 @@
 ﻿using MarsRover.Models.Enums;
-using System;
 
 namespace MarsRover.Models
 {
@@ -44,6 +43,8 @@ namespace MarsRover.Models
                 case Direction.North:
                     Position.Coordinates.Y += 1;
                     break;
+                default:
+                    throw new DirectionNotFoundException("Direction command not recognizable!");
             }
         }
 
@@ -63,6 +64,8 @@ namespace MarsRover.Models
                 case Direction.North:
                     Position.Direction = Direction.East;
                     break;
+                default:
+                    throw new DirectionNotFoundException("Direction command not recognizable!");
             }
         }
 
@@ -82,6 +85,8 @@ namespace MarsRover.Models
                 case Direction.South:
                     Position.Direction = Direction.East;
                     break;
+                default:
+                    throw new DirectionNotFoundException("Direction command not recognizable!");
             }
         }
 
