@@ -2,7 +2,7 @@ using Xunit;
 
 namespace MarsRoverTests
 {
-    public class UnitTest1
+    public class PlateauTests
     {
         [Fact]
         public void Test1()
