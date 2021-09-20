@@ -57,7 +57,7 @@ namespace MarsRover
             {
                 foreach (DirectionCommand directionCommand in directionCommands[i])
                 {
-                    plateau.Rovers[i].ChangePosition(directionCommand);
+                    plateau.MoveRover(i, directionCommand);
                 }
             }
             foreach(Rover rover in plateau.Rovers)

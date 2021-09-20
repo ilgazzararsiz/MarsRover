@@ -11,80 +11,75 @@ namespace MarsRover.Models
             this.Position = Position;
         }
 
-        public void ChangePosition(DirectionCommand directionCommand)
+        public Position ChangePosition(DirectionCommand directionCommand)
         {
             switch (directionCommand)
             {
                 case DirectionCommand.Left:
-                    TurnLeft();
-                    break;
+                    return new Position(Position.Coordinates, TurnLeft());
                 case DirectionCommand.Right:
-                    TurnRight();
-                    break;
+                    return new Position(Position.Coordinates, TurnRight());
                 case DirectionCommand.Move:
-                    Move();
-                    break;
+                    return Move();
+                default:
+                    throw new CommandNotFoundException("Command Not Found!");
             }
         }
 
-        private void Move()
+        private Position Move()
+        {
+            var newPosition = new Position(Position.Coordinates, Position.Direction);
+
+            switch (Position.Direction)
+            {
+                case Direction.East:
+                    newPosition.Coordinates.X += 1;
+                    break;
+                case Direction.West:
+                    newPosition.Coordinates.X -= 1;
+                    break;
+                case Direction.South:
+                    newPosition.Coordinates.Y -= 1;
+                    break;
+                case Direction.North:
+                    newPosition.Coordinates.Y += 1;
+                    break;
+                default:
+                    throw new DirectionNotFoundException("Direction command not recognizable!");
+            }
+
+            return newPosition;
+        }
+
+        private Direction TurnRight()
         {
             switch (Position.Direction)
             {
                 case Direction.East:
-                    Position.Coordinates.X += 1;
-                    break;
-                case Direction.West:
-                    Position.Coordinates.X -= 1;
-                    break;
+                    return Direction.South;
                 case Direction.South:
-                    Position.Coordinates.Y -= 1;
-                    break;
+                    return Direction.West;
+                case Direction.West:
+                    return Direction.North;
                 case Direction.North:
-                    Position.Coordinates.Y += 1;
-                    break;
+                    return Direction.East;
                 default:
                     throw new DirectionNotFoundException("Direction command not recognizable!");
             }
         }
 
-        private void TurnRight()
+        private Direction TurnLeft()
         {
             switch (Position.Direction)
             {
                 case Direction.East:
-                    Position.Direction = Direction.South;
-                    break;
-                case Direction.South:
-                    Position.Direction = Direction.West;
-                    break;
-                case Direction.West:
-                    Position.Direction = Direction.North;
-                    break;
+                    return Direction.North;
                 case Direction.North:
-                    Position.Direction = Direction.East;
-                    break;
-                default:
-                    throw new DirectionNotFoundException("Direction command not recognizable!");
-            }
-        }
-
-        private void TurnLeft()
-        {
-            switch (Position.Direction)
-            {
-                case Direction.East:
-                    Position.Direction = Direction.North;
-                    break;
-                case Direction.North:
-                    Position.Direction = Direction.West;
-                    break;
+                    return Direction.West;
                 case Direction.West:
-                    Position.Direction = Direction.South;
-                    break;
+                    return Direction.South;
                 case Direction.South:
-                    Position.Direction = Direction.East;
-                    break;
+                    return Direction.East;
                 default:
                     throw new DirectionNotFoundException("Direction command not recognizable!");
             }
